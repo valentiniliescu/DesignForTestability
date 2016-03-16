@@ -9,9 +9,16 @@ namespace designIssueExampleTests
     public class YuckyTests
     {
         [TestMethod]
-        public void GetEmployees_ShouldThrowOnByNameFilterTypeAndNullFilter()
+        [Ignore]
+        public void GetEmployees_ShouldThrowOnNullFilter()
         {
-            Action a = () => new Yucky().GetEmployees(null, null);
+            // TODO: add test when adding a employee store simulator
+        }
+
+        [TestMethod]
+        public void GetEmployees_ShouldThrowOnNullStore()
+        {
+            Action a = () => new Yucky().GetEmployees(new EmployeeFilterExemptOnly(), null);
             a.ShouldThrow<ArgumentNullException>();
         }
 
@@ -20,7 +27,8 @@ namespace designIssueExampleTests
         {
             Yucky yucky = new Yucky();
             var filter = new EmployeeFilterByNamePrefix("T");
-            var employees = yucky.GetEmployees(filter, new FakeSqlConnection());
+            var store = new EmployeeStoreDatabase(new FakeSqlConnection());
+            var employees = yucky.GetEmployees(filter, store);
 
             employees.Should().BeEquivalentTo(new Employee[] {
                 new Employee {Name = "Ted theRed", Id = 35323, Age = 16, IsSalaried = false},
@@ -33,7 +41,8 @@ namespace designIssueExampleTests
         {
             Yucky yucky = new Yucky();
             var filter = new EmployeeFilterExemptOnly();
-            var employees = yucky.GetEmployees(filter, new FakeSqlConnection());
+            var store = new EmployeeStoreDatabase(new FakeSqlConnection());
+            var employees = yucky.GetEmployees(filter, store);
 
             employees.Should().BeEquivalentTo(new Employee[] {
                 new Employee {Name = "Fred Flintstone", Id = 35323, Age = 42, IsSalaried = true}

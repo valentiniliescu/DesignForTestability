@@ -8,8 +8,9 @@ namespace designIssueExample
         {
             Yucky yucky = new Yucky();
             var filter = new EmployeeFilterByNamePrefix("T");
+            var store = new EmployeeStoreDatabase(new FakeSqlConnection());
 
-            var employees = yucky.GetEmployees(filter, new FakeSqlConnection());
+            var employees = yucky.GetEmployees(filter, store);
 
             foreach (Employee employee in employees)
             {
