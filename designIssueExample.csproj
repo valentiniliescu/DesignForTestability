@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Employee.cs" />
-    <Compile Include="EmployeeFilterType.cs" />
+    <Compile Include="EmployeeFilter.cs" />
     <Compile Include="FakeSql.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

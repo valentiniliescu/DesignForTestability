@@ -10,9 +10,9 @@ namespace designIssueExample
         private const int EmployeeAgeColumnIndex = 2;
         private const int EmployeeIsSalariedColumnIndex = 3;
 
-        public IEnumerable<Employee> GetEmployees(EmployeeFilterType employeeFilterType, string filter, FakeSqlConnection connection)
+        public IEnumerable<Employee> GetEmployees(IEmployeeFilter filter, FakeSqlConnection connection)
         {
-            if (employeeFilterType == EmployeeFilterType.ByName && filter == null)
+            if (filter == null)
             {
                 throw new ArgumentNullException("filter");
             }
@@ -45,17 +45,12 @@ namespace designIssueExample
                     int age = reader.GetInt32(EmployeeAgeColumnIndex);
                     bool isSalaried = reader.GetBoolean(EmployeeIsSalariedColumnIndex);
 
-                    switch (employeeFilterType)
-                    {
-                        case EmployeeFilterType.ByName:
-                            if (!name.StartsWith(filter)) continue;
-                            break;
-                        case EmployeeFilterType.ExemptOnly:
-                            if (age < 40 || !isSalaried) continue;
-                            break;
-                    }
+                    var employee = new Employee { Name = name, Id = id, Age = age, IsSalaried = isSalaried };
 
-                    result.Add(new Employee {Name = name, Id = id, Age = age, IsSalaried = isSalaried});
+                    if (filter.Is(employee))
+                    {
+                        result.Add(employee);
+                    }
                 }
             }
 
