@@ -22,6 +22,11 @@ namespace designIssueExample
             _connection = connection;
         }
 
+        public void Add(IEnumerable<Employee> employees)
+        {
+            //TODO: use INSERT INTO to add the employees to the database
+        }
+
         public IEnumerable<Employee> GetAllEmployees()
         {
             string query = "select * from employee, employee_role inner join employee.Id == employee_role.EmployeeId";

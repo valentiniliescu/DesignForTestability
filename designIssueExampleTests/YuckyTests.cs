@@ -1,18 +1,31 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using designIssueExample;
 using FluentAssertions;
-using designIssueExample;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace designIssueExampleTests
 {
     [TestClass]
     public class YuckyTests
     {
+        private IEmployeeStore _CreateEmployeeStoreInMemory()
+        {
+            var store = new EmployeeStoreInMemory();
+            store.Add(new Employee[] {
+                new Employee { Id = 35323, Name = "Fred Flintstone", Age = 42, IsSalaried = true },
+                new Employee { Id = 35323, Name = "Barney Rubble", Age = 38, IsSalaried = true },
+                new Employee { Id = 35323, Name = "Ted theRed", Age = 16, IsSalaried = false },
+                new Employee { Id = 35323, Name = "Tina Turnbull", Age = 18, IsSalaried = false }
+            });
+
+            return store;
+        }
+
         [TestMethod]
-        [Ignore]
         public void GetEmployees_ShouldThrowOnNullFilter()
         {
-            // TODO: add test when adding a employee store simulator
+            Action a = () => new Yucky().GetEmployees(null, new EmployeeStoreInMemory());
+            a.ShouldThrow<ArgumentNullException>();
         }
 
         [TestMethod]
@@ -27,7 +40,7 @@ namespace designIssueExampleTests
         {
             Yucky yucky = new Yucky();
             var filter = new EmployeeFilterByNamePrefix("T");
-            var store = new EmployeeStoreDatabase(new FakeSqlConnection());
+            var store = _CreateEmployeeStoreInMemory();
             var employees = yucky.GetEmployees(filter, store);
 
             employees.Should().BeEquivalentTo(new Employee[] {
@@ -41,7 +54,7 @@ namespace designIssueExampleTests
         {
             Yucky yucky = new Yucky();
             var filter = new EmployeeFilterExemptOnly();
-            var store = new EmployeeStoreDatabase(new FakeSqlConnection());
+            var store = _CreateEmployeeStoreInMemory();
             var employees = yucky.GetEmployees(filter, store);
 
             employees.Should().BeEquivalentTo(new Employee[] {
