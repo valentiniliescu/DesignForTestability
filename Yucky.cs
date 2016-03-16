@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace designIssueExample
 {
-    class Yucky
+    public class Yucky
     {
         private const int EmployeeIdColumnIndex = 0;
         private const int EmployeeNameColumnIndex = 1;

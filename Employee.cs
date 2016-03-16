@@ -1,7 +1,7 @@
 ﻿using System;
 namespace designIssueExample
 {
-    class Employee
+    public class Employee
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,6 +11,22 @@ namespace designIssueExample
         public override string ToString()
         {
             return String.Format("{0} {1} {2} {3}", Id, Name, Age, IsSalaried);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var otherEmployee = obj as Employee;
+            if (otherEmployee != null)
+            {
+                return Id == otherEmployee.Id
+                    && Name == otherEmployee.Name
+                    && Age == otherEmployee.Age
+                    && IsSalaried == otherEmployee.IsSalaried;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
