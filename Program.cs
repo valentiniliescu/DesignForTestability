@@ -7,7 +7,7 @@ namespace designIssueExample
         static void Main(string[] args)
         {
             Yucky yucky = new Yucky();
-            var filter = new EmployeeFilterByNamePrefix("T");
+            var filter = EmployeeFilterFactory.CreateFilterByNamePrefix("T");
             var store = new EmployeeStoreDatabase(new FakeSqlConnection());
 
             var employees = yucky.GetEmployees(filter, store);

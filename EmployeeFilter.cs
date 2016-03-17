@@ -2,36 +2,23 @@
 
 namespace designIssueExample
 {
-    public interface IEmployeeFilter
-    {
-        bool Matches(Employee employee);
-    }
+    using EmployeeFilter = Func<Employee, bool>;
 
-    public class EmployeeFilterByNamePrefix : IEmployeeFilter
+    public static class EmployeeFilterFactory
     {
-        private string _namePrefix;
-
-        public EmployeeFilterByNamePrefix(string namePrefix)
+        public static EmployeeFilter CreateFilterByNamePrefix(string namePrefix)
         {
             if (namePrefix == null)
             {
                 throw new ArgumentNullException("namePrefix");
             }
 
-            _namePrefix = namePrefix;
+            return (Employee employee) => employee?.Name?.StartsWith(namePrefix) ?? false;
         }
 
-        public bool Matches(Employee employee)
+        public static EmployeeFilter CreateFilterExemptOnly()
         {
-            return employee != null && employee.Name.StartsWith(_namePrefix);
-        }
-    }
-
-    public class EmployeeFilterExemptOnly : IEmployeeFilter
-    {
-        public bool Matches(Employee employee)
-        {
-            return employee != null && employee.Age >= 40 && employee.IsSalaried;
+            return (Employee employee) => employee?.Age >= 40 && (employee?.IsSalaried ?? false);
         }
     }
 }

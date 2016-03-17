@@ -31,7 +31,7 @@ namespace designIssueExampleTests
         [TestMethod]
         public void GetEmployees_ShouldThrowOnNullStore()
         {
-            Action a = () => new Yucky().GetEmployees(new EmployeeFilterExemptOnly(), null);
+            Action a = () => new Yucky().GetEmployees(EmployeeFilterFactory.CreateFilterExemptOnly(), null);
             a.ShouldThrow<ArgumentNullException>();
         }
 
@@ -39,7 +39,7 @@ namespace designIssueExampleTests
         public void GetEmployees_ShouldFilterByName()
         {
             Yucky yucky = new Yucky();
-            var filter = new EmployeeFilterByNamePrefix("T");
+            var filter = EmployeeFilterFactory.CreateFilterByNamePrefix("T");
             var store = _CreateEmployeeStoreInMemory();
             var employees = yucky.GetEmployees(filter, store);
 
@@ -53,7 +53,7 @@ namespace designIssueExampleTests
         public void GetEmployees_ShouldFilterByExemption()
         {
             Yucky yucky = new Yucky();
-            var filter = new EmployeeFilterExemptOnly();
+            var filter = EmployeeFilterFactory.CreateFilterExemptOnly();
             var store = _CreateEmployeeStoreInMemory();
             var employees = yucky.GetEmployees(filter, store);
 
