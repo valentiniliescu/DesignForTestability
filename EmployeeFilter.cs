@@ -4,7 +4,7 @@ namespace designIssueExample
 {
     public interface IEmployeeFilter
     {
-        bool Is(Employee employee);
+        bool Matches(Employee employee);
     }
 
     public class EmployeeFilterByNamePrefix : IEmployeeFilter
@@ -21,7 +21,7 @@ namespace designIssueExample
             _namePrefix = namePrefix;
         }
 
-        public bool Is(Employee employee)
+        public bool Matches(Employee employee)
         {
             return employee != null && employee.Name.StartsWith(_namePrefix);
         }
@@ -29,7 +29,7 @@ namespace designIssueExample
 
     public class EmployeeFilterExemptOnly : IEmployeeFilter
     {
-        public bool Is(Employee employee)
+        public bool Matches(Employee employee)
         {
             return employee != null && employee.Age >= 40 && employee.IsSalaried;
         }

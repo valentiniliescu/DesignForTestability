@@ -18,7 +18,7 @@ namespace designIssueExample
                 throw new ArgumentNullException("store");
             }
 
-            return store.GetAllEmployees().Where(filter.Is);
+            return store.GetAllEmployees().Where(filter.Matches);
         }
     }
 }
