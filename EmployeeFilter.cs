@@ -23,7 +23,7 @@ namespace designIssueExample
 
         public bool Matches(Employee employee)
         {
-            return employee != null && employee.Name.StartsWith(_namePrefix);
+            return employee != null && employee.Name != null && employee.Name.StartsWith(_namePrefix);
         }
     }
 
