@@ -1,7 +1,7 @@
-﻿using designIssueExample;
+﻿using System.Linq;
+using designIssueExample;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace designIssueExampleTests
 {
@@ -17,7 +17,8 @@ namespace designIssueExampleTests
         public void Add_ToEmptyStoreShouldAddEmployees()
         {
             var store = _CreateEmployeeStore();
-            var employees = new Employee[] {
+            var employees = new[]
+            {
                 new Employee {Name = "Ted theRed", Id = 35323, Age = 16, IsSalaried = false},
                 new Employee {Name = "Tina Turnbull", Id = 35323, Age = 18, IsSalaried = false}
             };
@@ -31,13 +32,15 @@ namespace designIssueExampleTests
         public void Add_MultipleTimesToStoreShouldAddAllEmployees()
         {
             var store = _CreateEmployeeStore();
-            var employees1 = new Employee[] {
+            var employees1 = new[]
+            {
                 new Employee {Name = "Ted theRed", Id = 35323, Age = 16, IsSalaried = false},
                 new Employee {Name = "Tina Turnbull", Id = 35323, Age = 18, IsSalaried = false}
             };
-            var employees2 = new Employee[] {
-                new Employee { Id = 35323, Name = "Fred Flintstone", Age = 42, IsSalaried = true },
-                new Employee { Id = 35323, Name = "Barney Rubble", Age = 38, IsSalaried = true },
+            var employees2 = new[]
+            {
+                new Employee {Id = 35323, Name = "Fred Flintstone", Age = 42, IsSalaried = true},
+                new Employee {Id = 35323, Name = "Barney Rubble", Age = 38, IsSalaried = true}
             };
 
             store.Add(employees1);

@@ -6,16 +6,16 @@ namespace designIssueExample
 
     public static class EmployeeFilterFactory
     {
+        public static EmployeeFilter FilterExemptOnly = employee => employee != null && employee.Age >= 40 && employee.IsSalaried;
+
         public static EmployeeFilter CreateFilterByNamePrefix(string namePrefix)
         {
             if (namePrefix == null)
             {
-                throw new ArgumentNullException("namePrefix");
+                throw new ArgumentNullException(nameof(namePrefix));
             }
 
-            return (Employee employee) => employee?.Name?.StartsWith(namePrefix) ?? false;
+            return employee => employee?.Name != null && employee.Name.StartsWith(namePrefix);
         }
-
-        public static EmployeeFilter FilterExemptOnly = (Employee employee) => employee?.Age >= 40 && (employee?.IsSalaried ?? false);
     }
 }

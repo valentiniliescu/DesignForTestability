@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace designIssueExample
 {
     public class EmployeeStoreInMemory : IEmployeeStore
     {
-        private List<Employee> _employees;
+        private readonly List<Employee> _employees;
 
         public EmployeeStoreInMemory()
         {

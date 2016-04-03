@@ -1,5 +1,4 @@
-﻿using System;
-namespace designIssueExample
+﻿namespace designIssueExample
 {
     public class Employee
     {
@@ -10,7 +9,7 @@ namespace designIssueExample
 
         public override string ToString()
         {
-            return String.Format("{0} {1} {2} {3}", Id, Name, Age, IsSalaried);
+            return $"{Id} {Name} {Age} {IsSalaried}";
         }
 
         public override bool Equals(object obj)
@@ -19,14 +18,11 @@ namespace designIssueExample
             if (otherEmployee != null)
             {
                 return Id == otherEmployee.Id
-                    && Name == otherEmployee.Name
-                    && Age == otherEmployee.Age
-                    && IsSalaried == otherEmployee.IsSalaried;
+                       && Name == otherEmployee.Name
+                       && Age == otherEmployee.Age
+                       && IsSalaried == otherEmployee.IsSalaried;
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

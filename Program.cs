@@ -2,21 +2,20 @@
 
 namespace designIssueExample
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Yucky yucky = new Yucky();
-            var filter =  EmployeeFilterFactory.CreateFilterByNamePrefix("T");
+            var yucky = new Yucky();
+            var filter = EmployeeFilterFactory.CreateFilterByNamePrefix("T");
             var store = new EmployeeStoreDatabase(new FakeSqlConnection());
 
             var employees = yucky.GetEmployees(filter, store);
 
-            foreach (Employee employee in employees)
+            foreach (var employee in employees)
             {
                 Console.WriteLine(employee);
             }
-
         }
     }
 }

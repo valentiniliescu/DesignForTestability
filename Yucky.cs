@@ -12,12 +12,12 @@ namespace designIssueExample
         {
             if (filter == null)
             {
-                throw new ArgumentNullException("filter");
+                throw new ArgumentNullException(nameof(filter));
             }
 
             if (store == null)
             {
-                throw new ArgumentNullException("store");
+                throw new ArgumentNullException(nameof(store));
             }
 
             return store.GetAllEmployees().Where(filter);
