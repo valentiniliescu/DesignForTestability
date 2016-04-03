@@ -4,9 +4,11 @@ using System.Linq;
 
 namespace designIssueExample
 {
+    using EmployeeFilter = Func<Employee, bool>;
+
     public class Yucky
     {
-        public IEnumerable<Employee> GetEmployees(IEmployeeFilter filter, IEmployeeStore store)
+        public IEnumerable<Employee> GetEmployees(EmployeeFilter filter, IEmployeeStore store)
         {
             if (filter == null)
             {
@@ -18,7 +20,7 @@ namespace designIssueExample
                 throw new ArgumentNullException("store");
             }
 
-            return store.GetAllEmployees().Where(filter.Matches);
+            return store.GetAllEmployees().Where(filter);
         }
     }
 }
