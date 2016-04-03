@@ -6,7 +6,7 @@ namespace designIssueExample
 
     public static class EmployeeFilterFactory
     {
-        public static EmployeeFilter FilterExemptOnly { get; } = employee => employee != null && employee.Age >= 40 && employee.IsSalaried;
+        public static readonly EmployeeFilter FilterExemptOnly = employee => employee != null && employee.Age >= 40 && employee.IsSalaried;
 
         public static EmployeeFilter CreateFilterByNamePrefix(string namePrefix)
         {
