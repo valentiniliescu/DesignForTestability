@@ -8,14 +8,6 @@ namespace designIssueExample
     {
         public static readonly EmployeeFilter FilterExemptOnly = employee => employee != null && employee.Age >= 40 && employee.IsSalaried;
 
-        public static EmployeeFilter CreateFilterByNamePrefix(string namePrefix)
-        {
-            if (namePrefix == null)
-            {
-                throw new ArgumentNullException(nameof(namePrefix));
-            }
-
-            return employee => employee?.Name != null && employee.Name.StartsWith(namePrefix);
-        }
+        public static readonly Func<string, EmployeeFilter> CreateFilterByNamePrefix = namePrefix => employee => employee?.Name != null && employee.Name.StartsWith(namePrefix);
     }
 }
